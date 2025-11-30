@@ -11,8 +11,8 @@ public class JewelGrinding : MonoBehaviour
 
     public float minSpeed = 200f; 
     public float maxSpeed = 800f; 
-    public float progressSpeed = 20f;
-    public float crackSpeed = 15f; 
+    public float progressSpeed = 4f;
+    public float crackSpeed = 3f; 
 
     private Vector3 lastMousePos;
     private bool isGrinding = false;

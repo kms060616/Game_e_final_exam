@@ -402,6 +402,7 @@ GameObject:
   - component: {fileID: 377987851}
   - component: {fileID: 377987855}
   - component: {fileID: 377987854}
+  - component: {fileID: 377987856}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -517,6 +518,26 @@ MonoBehaviour:
   JumpPower: 5
   gravity: -9.81
   mouseSensitivity: 3
+--- !u!114 &377987856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377987849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a63d11a9a2b23941ad37de7e70b5c32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayDistance: 5
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  toolDamage: 1
+  hitCooldown: 0.15
+  inventory: {fileID: 0}
+  seletedBlock: {fileID: 842488815}
 --- !u!1 &410118913
 GameObject:
   m_ObjectHideFlags: 0
@@ -1064,8 +1085,8 @@ MonoBehaviour:
   crackBar: {fileID: 1927537395}
   minSpeed: 200
   maxSpeed: 800
-  progressSpeed: 20
-  crackSpeed: 15
+  progressSpeed: 4
+  crackSpeed: 3
 --- !u!114 &806881750
 MonoBehaviour:
   m_ObjectHideFlags: 0
