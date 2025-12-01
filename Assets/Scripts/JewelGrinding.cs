@@ -9,19 +9,14 @@ public class JewelGrinding : MonoBehaviour
     public Slider progressBar;
     public Slider crackBar;
 
-    public float minSpeed = 200f; 
-    public float maxSpeed = 800f; 
-    public float progressSpeed = 4f;
-    public float crackSpeed = 3f; 
+    public float minSpeed = 200f;
+    public float maxSpeed = 800f;
+    public float progressSpeed = 3f;
+    public float crackSpeed = 2f;
 
     private Vector3 lastMousePos;
     private bool isGrinding = false;
 
-
-    void Start()
-    {
-        StartGrinding();
-    }
     void Update()
     {
         if (!isGrinding) return;
@@ -29,14 +24,11 @@ public class JewelGrinding : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             Vector3 current = Input.mousePosition;
-
             float dragSpeed = (current - lastMousePos).magnitude / Time.deltaTime;
 
-            // 연마 휠 회전
             float rotateAmount = dragSpeed * 0.02f;
             wheelImage.transform.Rotate(0, 0, -rotateAmount);
 
-            // 적정 속도 체크
             if (dragSpeed > minSpeed && dragSpeed < maxSpeed)
             {
                 progressBar.value += progressSpeed * Time.deltaTime;
@@ -63,26 +55,22 @@ public class JewelGrinding : MonoBehaviour
     void CheckResult()
     {
         if (progressBar.value >= 1f)
-        {
             Success();
-        }
         else if (crackBar.value >= 1f)
-        {
             Fail();
-        }
     }
 
     void Success()
     {
         isGrinding = false;
         Debug.Log("연마 성공!");
-        // TODO: 아이템 반환 + UI 닫기
+        gameObject.SetActive(false); // 끝나면 패널 닫기
     }
 
     void Fail()
     {
         isGrinding = false;
         Debug.Log("보석 깨짐…");
-        // TODO: 실패 처리
+        gameObject.SetActive(false); // 실패해도 패널 닫기
     }
 }
