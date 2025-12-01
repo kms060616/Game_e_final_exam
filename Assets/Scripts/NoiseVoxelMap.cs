@@ -12,6 +12,8 @@ public class NoiseVoxelMap : MonoBehaviour
 
     public GameObject blockGrass;
 
+    public GameObject blockGold;
+
     public int width = 10;
 
     public int depth = 10;
@@ -21,6 +23,8 @@ public class NoiseVoxelMap : MonoBehaviour
     public int maxHeight = 16;
 
     [SerializeField] float noiseScale = 20;
+
+    [SerializeField] float goldSpawnChance = 0.15f;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,16 +45,29 @@ public class NoiseVoxelMap : MonoBehaviour
 
                 if (h <= 0) continue;
 
-                
+
                 for (int y = 0; y <= h; y++)
                 {
                     if (y == h)
+                    {
+                        // 맨 윗칸 = 풀
                         PlaceGrass(x, y, z);
+                    }
                     else
-                        PlaceDirt(x, y, z);
+                    {
+                        // 바로 아래 칸(y == h - 1)에만 금 생성 시도
+                        if (y == h - 1 && Random.value < goldSpawnChance)
+                        {
+                            PlaceGold(x, y, z);
+                        }
+                        else
+                        {
+                            PlaceDirt(x, y, z);
+                        }
+                    }
                 }
 
-                
+
                 for (int y2 = h + 1; y2 <= waterLevel; y2++)
                 {
                     PlaceWater(x, y2, z);
@@ -72,6 +89,9 @@ public class NoiseVoxelMap : MonoBehaviour
                 break;
             case BlockType.Water:
                 PlaceWater(pos.x, pos.y, pos.z);
+                break;
+            case BlockType.GoldOre:        
+                PlaceGold(pos.x, pos.y, pos.z);
                 break;
         }
     }
@@ -117,6 +137,18 @@ public class NoiseVoxelMap : MonoBehaviour
         b.dropCount = 1;
         b.mineable = false;
         
+    }
+
+    private void PlaceGold(int x, int y, int z)
+    {
+        var go = Instantiate(blockGold, new Vector3(x, y, z), Quaternion.identity, transform);
+        go.name = $"G_({x})_({y})_({z})";
+
+        var b = go.GetComponent<Block>() ?? go.AddComponent<Block>();
+        b.type = BlockType.GoldOre;
+        b.maxHp = 5;       // 금이니까 조금 더 단단하게?
+        b.dropCount = 1;   // 캐면 1개 드랍
+        b.mineable = true;
     }
 
 }

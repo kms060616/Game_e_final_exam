@@ -11,6 +11,8 @@ public class InventoryUI : MonoBehaviour
     public Sprite Dirt;
     public Sprite Grass;
     public Sprite Water;
+    public Sprite GoldOre;
+    public Sprite GoldIngot;
     public List<Transform> Slot = new List<Transform>();
     public GameObject SlotItem;
     List<GameObject> items = new List<GameObject>();
@@ -48,6 +50,12 @@ public class InventoryUI : MonoBehaviour
                     break;
                 case BlockType.Grass:
                     sltem.ItemSetting(Grass, "x" + item.Value.ToString(), item.Key);
+                    break;
+                case BlockType.GoldOre:
+                    sltem.ItemSetting(GoldOre, "x" + item.Value.ToString(), item.Key);
+                    break;
+                case BlockType.GoldIngot:
+                    sltem.ItemSetting(GoldIngot, "x" + item.Value.ToString(), item.Key);
                     break;
 
 
