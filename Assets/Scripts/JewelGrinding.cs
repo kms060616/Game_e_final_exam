@@ -17,6 +17,10 @@ public class JewelGrinding : MonoBehaviour
     private Vector3 lastMousePos;
     private bool isGrinding = false;
 
+    
+    private Inventory ownerInventory;
+    private BlockType outputType;
+
     void Update()
     {
         if (!isGrinding) return;
@@ -44,8 +48,12 @@ public class JewelGrinding : MonoBehaviour
         CheckResult();
     }
 
-    public void StartGrinding()
+    
+    public void StartGrinding(Inventory inven, BlockType output)
     {
+        ownerInventory = inven;
+        outputType = output;
+
         isGrinding = true;
         lastMousePos = Input.mousePosition;
         progressBar.value = 0;
@@ -64,13 +72,24 @@ public class JewelGrinding : MonoBehaviour
     {
         isGrinding = false;
         Debug.Log("연마 성공!");
-        gameObject.SetActive(false); // 끝나면 패널 닫기
+
+        //연마 성공 시: 인벤토리에 결과 아이템 1개 지급
+        if (ownerInventory != null)
+        {
+            ownerInventory.Add(outputType, 1);
+        }
+
+        gameObject.SetActive(false); // 패널 끄기
     }
 
     void Fail()
     {
         isGrinding = false;
         Debug.Log("보석 깨짐…");
-        gameObject.SetActive(false); // 실패해도 패널 닫기
+
+        // 여기서 실패 시 원석을 돌려줄지, 그냥 날려버릴지 선택 가능
+        // if (ownerInventory != null) ownerInventory.Add(BlockType.GoldOre, 1);
+
+        gameObject.SetActive(false); // 패널 끄기
     }
 }

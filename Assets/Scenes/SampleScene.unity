@@ -1991,7 +1991,7 @@ MonoBehaviour:
   Grass: {fileID: 21300000, guid: d68d28cf5414aad4681d6fe6c831b5b6, type: 3}
   Water: {fileID: 0}
   GoldOre: {fileID: 21300000, guid: f9ed9c81a170a8a46b59cbfb68422d39, type: 3}
-  GoldIngot: {fileID: 0}
+  GoldIngot: {fileID: 21300000, guid: 10722139f2a71934a9d6c14329c74a66, type: 3}
   Slot:
   - {fileID: 716346101}
   - {fileID: 1140270904}

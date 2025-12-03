@@ -5,10 +5,11 @@ using UnityEngine;
 public class GrindingStation : MonoBehaviour
 {
     [Header("UI 패널 연결")]
-    public GameObject grindingPanel;          // Canvas 안의 GrindingPanel
-    private JewelGrinding jewelGrinding;      // 패널에 있는 스크립트
+    public GameObject grindingPanel;        
+    private JewelGrinding jewelGrinding; 
 
     private bool playerInRange = false;
+    private Inventory playerInventory;      
 
     private void Start()
     {
@@ -23,7 +24,8 @@ public class GrindingStation : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            Debug.Log("연마대 근처에 접근함. E키로 상호작용 가능");
+            playerInventory = other.GetComponent<Inventory>(); 
+            Debug.Log("연마대 근처에 접근. E키로 연마 가능");
         }
     }
 
@@ -32,6 +34,7 @@ public class GrindingStation : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
+            playerInventory = null;
             Debug.Log("연마대 범위에서 벗어남");
         }
     }
@@ -42,15 +45,26 @@ public class GrindingStation : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            OpenGrinding();
+            TryOpenGrinding();
         }
     }
 
-    void OpenGrinding()
+    void TryOpenGrinding()
     {
-        if (grindingPanel == null || jewelGrinding == null) return;
+        if (grindingPanel == null || jewelGrinding == null || playerInventory == null)
+        {
+            Debug.LogWarning("연마대 세팅이 안되어 있습니다.");
+            return;
+        }
 
-        grindingPanel.SetActive(true);   // 패널 켜기
-        jewelGrinding.StartGrinding();   // 연마 시작
+        if (!playerInventory.Consume(BlockType.GoldOre, 1))
+        {
+            Debug.Log("연마할 GoldOre가 없습니다!");
+            return;
+        }
+
+        
+        grindingPanel.SetActive(true);
+        jewelGrinding.StartGrinding(playerInventory, BlockType.GoldIngot);
     }
 }
