@@ -14,6 +14,8 @@ public class NoiseVoxelMap : MonoBehaviour
 
     public GameObject blockGold;
 
+    public GameObject blockSilver;
+
     public int width = 10;
 
     public int depth = 10;
@@ -25,6 +27,8 @@ public class NoiseVoxelMap : MonoBehaviour
     [SerializeField] float noiseScale = 20;
 
     [SerializeField] float goldSpawnChance = 0.15f;
+
+    [SerializeField] float silverSpawnChance = 0.05f;
     // Start is called before the first frame update
     void Start()
     {
@@ -62,7 +66,16 @@ public class NoiseVoxelMap : MonoBehaviour
                         }
                         else
                         {
-                            PlaceDirt(x, y, z);
+                            bool canSpawnSilver = (y > 0 && y < h - 1); // 맨 아래, 바로 풀 아래는 제외
+
+                            if (canSpawnSilver && Random.value < silverSpawnChance)
+                            {
+                                PlaceSilverOre(x, y, z);
+                            }
+                            else
+                            {
+                                PlaceDirt(x, y, z);
+                            }
                         }
                     }
                 }
@@ -92,6 +105,9 @@ public class NoiseVoxelMap : MonoBehaviour
                 break;
             case BlockType.GoldOre:        
                 PlaceGold(pos.x, pos.y, pos.z);
+                break;
+            case BlockType.SilverOre:           
+                PlaceSilverOre(pos.x, pos.y, pos.z);
                 break;
         }
     }
@@ -148,6 +164,18 @@ public class NoiseVoxelMap : MonoBehaviour
         b.type = BlockType.GoldOre;
         b.maxHp = 5;       // 금이니까 조금 더 단단하게?
         b.dropCount = 1;   // 캐면 1개 드랍
+        b.mineable = true;
+    }
+
+    private void PlaceSilverOre(int x, int y, int z)
+    {
+        var go = Instantiate(blockSilver, new Vector3(x, y, z), Quaternion.identity, transform);
+        go.name = $"SO_({x})_({y})_({z})";
+
+        var b = go.GetComponent<Block>() ?? go.AddComponent<Block>();
+        b.type = BlockType.SilverOre;
+        b.maxHp = 4;      // 은은 금보다 살짝 약하게? (원하는 대로 조절)
+        b.dropCount = 1;
         b.mineable = true;
     }
 

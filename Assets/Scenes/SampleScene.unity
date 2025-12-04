@@ -1676,12 +1676,14 @@ MonoBehaviour:
   blockWater: {fileID: 3801396439535546332, guid: c526262fbeda14545905517630a92543, type: 3}
   blockGrass: {fileID: 610633533287629706, guid: 22e2e0b9e0693804f852e4223a75e890, type: 3}
   blockGold: {fileID: 3801396439535546332, guid: ec8027cd0905ae64296238281d8dc97e, type: 3}
+  blockSilver: {fileID: 8986107511509084986, guid: e2637734a1df7d343907584351d87573, type: 3}
   width: 40
   depth: 40
   waterLevel: 4
   maxHeight: 16
   noiseScale: 20
   goldSpawnChance: 0.15
+  silverSpawnChance: 0.05
 --- !u!4 &1211142680
 Transform:
   m_ObjectHideFlags: 0
