@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EngraveStation : MonoBehaviour
 {
-    public EngravePuzzleManager engravingUI;
+    public EngraveSelectUI selectUI;
 
     private Inventory playerInventory;
     private bool playerInRange;
@@ -15,6 +15,8 @@ public class EngraveStation : MonoBehaviour
         {
             playerInventory = other.GetComponent<Inventory>();
             playerInRange = true;
+
+            Debug.Log("세공대 접근: 인벤토리 연결됨");
         }
     }
 
@@ -24,6 +26,8 @@ public class EngraveStation : MonoBehaviour
         {
             playerInventory = null;
             playerInRange = false;
+
+            Debug.Log("세공대 범위 벗어남");
         }
     }
 
@@ -33,19 +37,15 @@ public class EngraveStation : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            TryEngrave();
+            if (selectUI != null && playerInventory != null)
+            {
+                selectUI.Open(playerInventory); 
+                Debug.Log("세공 선택 UI 오픈");
+            }
+            else
+            {
+                Debug.LogWarning("selectUI 또는 playerInventory가 NULL");
+            }
         }
-    }
-
-    void TryEngrave()
-    {
-        if (!playerInventory.Consume(BlockType.SilverIngot, 1))
-        {
-            Debug.Log("세공할 은 주괴가 없습니다!");
-            return;
-        }
-
-       
-        engravingUI.StartEngraving(playerInventory, BlockType.SilverIngot);
     }
 }
