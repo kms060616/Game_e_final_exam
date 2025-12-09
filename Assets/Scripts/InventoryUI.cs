@@ -15,6 +15,12 @@ public class InventoryUI : MonoBehaviour
     public Sprite GoldIngot;
     public Sprite SilverOre;
     public Sprite SilverIgot;
+    public Sprite GoldRing;
+    public Sprite GoldNecklace;
+    public Sprite SilverRing;
+    public Sprite SilverNecklace;
+    public Sprite DiamondOre;
+    public Sprite DiamondGem;
     public List<Transform> Slot = new List<Transform>();
     public GameObject SlotItem;
     List<GameObject> items = new List<GameObject>();
@@ -64,6 +70,24 @@ public class InventoryUI : MonoBehaviour
                     break;
                 case BlockType.SilverIngot:
                     sltem.ItemSetting(SilverIgot, "x" + item.Value.ToString(), item.Key);
+                    break;
+                case BlockType.GoldRing:
+                    sltem.ItemSetting(GoldRing, "x" + item.Value.ToString(), item.Key);
+                    break;
+                case BlockType.GoldNecklace:
+                    sltem.ItemSetting(GoldNecklace, "x" + item.Value.ToString(), item.Key);
+                    break;
+                case BlockType.SilverRing:
+                    sltem.ItemSetting(SilverRing, "x" + item.Value.ToString(), item.Key);
+                    break;
+                case BlockType.SilverNecklace:
+                    sltem.ItemSetting(SilverNecklace, "x" + item.Value.ToString(), item.Key);
+                    break;
+                case BlockType.DiamondOre:
+                    sltem.ItemSetting(DiamondOre, "x" + item.Value.ToString(), item.Key);
+                    break;
+                case BlockType.DiamondGem:
+                    sltem.ItemSetting(DiamondGem, "x" + item.Value.ToString(), item.Key);
                     break;
 
 

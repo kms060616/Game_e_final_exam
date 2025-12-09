@@ -5247,6 +5247,12 @@ MonoBehaviour:
   GoldIngot: {fileID: 21300000, guid: 10722139f2a71934a9d6c14329c74a66, type: 3}
   SilverOre: {fileID: 21300000, guid: 5250b78754897234f9db95c9c5d652c8, type: 3}
   SilverIgot: {fileID: 21300000, guid: f4cd8fa631be6aa439dcc9dab475b4e9, type: 3}
+  GoldRing: {fileID: 21300000, guid: a834ca65a4d439945a4d4a3c6bb8b98e, type: 3}
+  GoldNecklace: {fileID: 21300000, guid: 8679e78d0a8a25d40bc4a0f5640415db, type: 3}
+  SilverRing: {fileID: 21300000, guid: dfafb3df6e3264c4b8334ffe903e84a5, type: 3}
+  SilverNecklace: {fileID: 21300000, guid: 028b1a130ded85540abb65e42c6ec55a, type: 3}
+  DiamondOre: {fileID: 21300000, guid: f4f92627ce690ee45814f159ee8f0b99, type: 3}
+  DiamondGem: {fileID: 21300000, guid: 0481c4b856e1ec349a6e6230d688b91e, type: 3}
   Slot:
   - {fileID: 716346101}
   - {fileID: 1140270904}
