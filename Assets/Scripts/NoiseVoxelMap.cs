@@ -16,6 +16,8 @@ public class NoiseVoxelMap : MonoBehaviour
 
     public GameObject blockSilver;
 
+    public GameObject blockDiamond;
+
     public int width = 10;
 
     public int depth = 10;
@@ -29,6 +31,8 @@ public class NoiseVoxelMap : MonoBehaviour
     [SerializeField] float goldSpawnChance = 0.15f;
 
     [SerializeField] float silverSpawnChance = 0.05f;
+
+    [SerializeField] float diamondSpawnChance = 0.01f;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,23 +63,32 @@ public class NoiseVoxelMap : MonoBehaviour
                     }
                     else
                     {
-                        // 바로 아래 칸(y == h - 1)에만 금 생성 시도
-                        if (y == h - 1 && Random.value < goldSpawnChance)
-                        {
-                            PlaceGold(x, y, z);
-                        }
-                        else
-                        {
-                            bool canSpawnSilver = (y > 0 && y < h - 1); // 맨 아래, 바로 풀 아래는 제외
+                        bool canSpawnOre = (y > 0 && y < h - 1); 
 
-                            if (canSpawnSilver && Random.value < silverSpawnChance)
+                        if (canSpawnOre)
+                        {
+                            float roll = Random.value;
+
+                            if (roll < diamondSpawnChance)
                             {
-                                PlaceSilverOre(x, y, z);
+                                PlaceDiamondOre(x, y, z);     
+                            }
+                            else if (roll < diamondSpawnChance + silverSpawnChance)
+                            {
+                                PlaceSilverOre(x, y, z);      
+                            }
+                            else if (roll < diamondSpawnChance + silverSpawnChance + goldSpawnChance)
+                            {
+                                PlaceGold(x, y, z);           
                             }
                             else
                             {
-                                PlaceDirt(x, y, z);
+                                PlaceDirt(x, y, z);           
                             }
+                        }
+                        else
+                        {
+                            PlaceDirt(x, y, z);                
                         }
                     }
                 }
@@ -109,6 +122,10 @@ public class NoiseVoxelMap : MonoBehaviour
             case BlockType.SilverOre:           
                 PlaceSilverOre(pos.x, pos.y, pos.z);
                 break;
+            case BlockType.DiamondOre:
+                PlaceDiamondOre(pos.x, pos.y, pos.z);
+                break;
+
         }
     }
 
@@ -175,6 +192,18 @@ public class NoiseVoxelMap : MonoBehaviour
         var b = go.GetComponent<Block>() ?? go.AddComponent<Block>();
         b.type = BlockType.SilverOre;
         b.maxHp = 4;      // 은은 금보다 살짝 약하게? (원하는 대로 조절)
+        b.dropCount = 1;
+        b.mineable = true;
+    }
+
+    private void PlaceDiamondOre(int x, int y, int z)
+    {
+        var go = Instantiate(blockDiamond, new Vector3(x, y, z), Quaternion.identity, transform);
+        go.name = $"DIA_({x})_({y})_({z})";
+
+        var b = go.GetComponent<Block>() ?? go.AddComponent<Block>();
+        b.type = BlockType.DiamondOre;
+        b.maxHp = 10;     
         b.dropCount = 1;
         b.mineable = true;
     }
