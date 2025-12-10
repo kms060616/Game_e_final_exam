@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEditor.Experimental.GraphView.GraphView;
+using static UnityEditor.Progress;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -32,6 +33,8 @@ public class InventoryUI : MonoBehaviour
         foreach (var slotItems in items)
         {
             Destroy(slotItems);
+
+            
         }
         items.Clear();
 
@@ -41,6 +44,25 @@ public class InventoryUI : MonoBehaviour
 
             if (idx >= Slot.Count)
                 break;
+
+            if (IsGemItem(item.Key))
+                continue;
+
+            bool IsGemItem(BlockType type)
+            {
+                switch (type)
+                {
+                    case BlockType.GoldOre:
+                    case BlockType.SilverOre:
+                    case BlockType.DiamondOre:
+                    case BlockType.GoldIngot:
+                    case BlockType.SilverIngot:
+                    case BlockType.DiamondGem:
+                        return true;   //º¸¼®/±¤¹°Àº ÀÏ¹Ý ÀÎº¥¿¡¼­ ¼û±è
+                    default:
+                        return false;
+                }
+            }
 
             var go = Instantiate(SlotItem, Slot[idx].transform);
             go.transform.localPosition = Vector3.zero;

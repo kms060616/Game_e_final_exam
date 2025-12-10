@@ -6,9 +6,9 @@ public class Inventory : MonoBehaviour
 {
     public Dictionary<BlockType, int> items = new();
     InventoryUI invenUI;
+    GemInventoryUI gemUI;
 
 
-    
 
     public void Add(BlockType type, int count = 1)
     {
@@ -17,6 +17,7 @@ public class Inventory : MonoBehaviour
         Debug.Log($"[Inventory] + {count} {type} (รั {items[type]})");
 
         invenUI.UpdateInventory(this);
+        if (gemUI != null) gemUI.UpdateInventory(this);
     }
 
     public bool Consume(BlockType type, int count = 1)
@@ -33,6 +34,7 @@ public class Inventory : MonoBehaviour
 
         }
         invenUI.UpdateInventory(this);
+        if (gemUI != null) gemUI.UpdateInventory(this);
 
         return true;
 
@@ -42,6 +44,8 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         invenUI = FindObjectOfType<InventoryUI>();
+        gemUI = FindObjectOfType<GemInventoryUI>();
+
     }
 
     // Update is called once per frame
