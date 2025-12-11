@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SilverNecklace
   m_EditorClassIdentifier: 
   type: 3
-  requiredMaterial: 0
-  requiredCount: 1
+  requiredMaterial: 6
+  requiredCount: 2
   puzzleSprite: {fileID: 21300000, guid: 028b1a130ded85540abb65e42c6ec55a, type: 3}
   correctRotations: 000000000000000000000000000000000000000000000000000000000000000000000000
-  resultItem: 0
+  resultItem: 10

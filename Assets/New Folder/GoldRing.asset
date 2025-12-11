@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GoldRing
   m_EditorClassIdentifier: 
   type: 0
-  requiredMaterial: 0
+  requiredMaterial: 4
   requiredCount: 1
   puzzleSprite: {fileID: 21300000, guid: a834ca65a4d439945a4d4a3c6bb8b98e, type: 3}
   correctRotations: 000000000000000000000000000000000000000000000000000000000000000000000000
-  resultItem: 0
+  resultItem: 7
