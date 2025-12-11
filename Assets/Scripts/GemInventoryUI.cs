@@ -12,6 +12,10 @@ public class GemInventoryUI : MonoBehaviour
     public Sprite GoldIngot;
     public Sprite SilverIngot;
     public Sprite DiamondGem;
+    public Sprite GoldRing;
+    public Sprite SilverRing;
+    public Sprite SilverNecklace;
+    public Sprite GoldNecklace;
 
     [Header("½½·Ô ±¸Á¶")]
     public List<Transform> Slots = new List<Transform>(); // º¸¼®¿ë ½½·Ôµé
@@ -66,6 +70,18 @@ public class GemInventoryUI : MonoBehaviour
                 case BlockType.DiamondGem:
                     slot.ItemSetting(DiamondGem, "x" + count, type);
                     break;
+                case BlockType.GoldRing:
+                    slot.ItemSetting(GoldRing, "x" + count, type);
+                    break;
+                case BlockType.GoldNecklace:
+                    slot.ItemSetting(GoldNecklace, "x" + count, type);
+                    break;
+                case BlockType.SilverNecklace:
+                    slot.ItemSetting(SilverNecklace, "x" + count, type);
+                    break;
+                case BlockType.SilverRing:
+                    slot.ItemSetting(SilverRing, "x" + count, type);
+                    break;
             }
 
             idx++;
@@ -83,6 +99,10 @@ public class GemInventoryUI : MonoBehaviour
             case BlockType.GoldIngot:
             case BlockType.SilverIngot:
             case BlockType.DiamondGem:
+            case BlockType.GoldRing:
+            case BlockType.GoldNecklace:
+            case BlockType.SilverNecklace:
+            case BlockType.SilverRing:
                 return true;
             default:
                 return false;

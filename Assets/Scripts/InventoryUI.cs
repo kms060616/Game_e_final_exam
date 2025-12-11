@@ -58,6 +58,10 @@ public class InventoryUI : MonoBehaviour
                     case BlockType.GoldIngot:
                     case BlockType.SilverIngot:
                     case BlockType.DiamondGem:
+                    case BlockType.GoldRing:
+                    case BlockType.GoldNecklace:
+                    case BlockType.SilverNecklace:
+                    case BlockType.SilverRing:
                         return true;   //º¸¼®/±¤¹°Àº ÀÏ¹Ý ÀÎº¥¿¡¼­ ¼û±è
                     default:
                         return false;
