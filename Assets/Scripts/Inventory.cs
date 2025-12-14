@@ -40,6 +40,13 @@ public class Inventory : MonoBehaviour
 
 
     }
+
+    public int GetCount(BlockType type)
+    {
+        if (items.TryGetValue(type, out var count))
+            return count;
+        return 0;
+    }
     // Start is called before the first frame update
     void Start()
     {
