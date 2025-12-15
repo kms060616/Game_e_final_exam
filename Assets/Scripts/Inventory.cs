@@ -50,8 +50,16 @@ public class Inventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        invenUI = FindObjectOfType<InventoryUI>();
+        
         gemUI = FindObjectOfType<GemInventoryUI>();
+
+        invenUI = FindObjectOfType<InventoryUI>(true);
+
+        Add(BlockType.Dirt, 10);
+        Add(BlockType.Grass, 10);
+
+        if (invenUI != null) invenUI.UpdateInventory(this);
+
 
     }
 

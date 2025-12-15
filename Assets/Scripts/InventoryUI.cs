@@ -182,4 +182,11 @@ public class InventoryUI : MonoBehaviour
     {
         return items[selectedIndex].GetComponent<SlotItemPrefab>().blockType;
     }
+
+    void OnEnable()
+    {
+        var inv = FindObjectOfType<Inventory>();
+        if (inv != null)
+            UpdateInventory(inv);
+    }
 }

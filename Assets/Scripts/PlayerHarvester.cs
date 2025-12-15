@@ -26,15 +26,20 @@ public class PlayerHarvester : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (invenUI == null) invenUI = FindObjectOfType<InventoryUI>(true);
+        if (_cam == null) _cam = Camera.main;
     }
 
     // Update is called once per frame
     void Update()
     {
+        bool hasPreview = (seletedBlock != null);
+
+        // 1) 선택 안 했을 때(채집 모드)
         if (invenUI.selectedIndex < 0)
         {
-            seletedBlock.transform.localScale = Vector3.zero;
+            if (hasPreview) seletedBlock.transform.localScale = Vector3.zero;
+
             if (Input.GetMouseButton(0) && Time.time >= _nextHitTime)
             {
                 _nextHitTime = Time.time + hitCooldown;
@@ -49,34 +54,39 @@ public class PlayerHarvester : MonoBehaviour
                     }
                 }
             }
+
+            return; // 채집 모드 끝
         }
-        else
+
+        // 2) 선택 했을 때(배치 모드)
+        Ray rayDebug = _cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        if (Physics.Raycast(rayDebug, out var hitDebug, rayDistance, hitMask, QueryTriggerInteraction.Ignore))
         {
-            Ray rayDebug = _cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-            if (Physics.Raycast(rayDebug, out var hitDebug, rayDistance, hitMask, QueryTriggerInteraction.Ignore))
+            Vector3Int placePos = AdjacentCellOnHitFace(hitDebug);
+
+            if (hasPreview)
             {
-                //Debug.DrawRay(hitDebug.point, hitDebug.normal, Color.red, 2f);
-                Vector3Int placePos = AdjacentCellOnHitFace(hitDebug);
                 seletedBlock.transform.localScale = Vector3.one;
                 seletedBlock.transform.position = placePos;
                 seletedBlock.transform.rotation = Quaternion.identity;
             }
-            else
-            {
-                seletedBlock.transform.localScale = Vector3.zero;
-            }
-            if (Input.GetMouseButtonDown(0))
-            {
-                Ray ray = _cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-                if (Physics.Raycast(ray, out var hit, rayDistance, hitMask, QueryTriggerInteraction.Ignore))
-                {
-                    Vector3Int placePos = AdjacentCellOnHitFace(hit);
+        }
+        else
+        {
+            if (hasPreview) seletedBlock.transform.localScale = Vector3.zero;
+        }
 
-                    BlockType selected = invenUI.GetInventorySlot();
-                    if (inventory.Consume(selected, 1))
-                    {
-                        FindAnyObjectByType<NoiseVoxelMap>().PlaceTile(placePos, selected);
-                    }
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = _cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+            if (Physics.Raycast(ray, out var hit, rayDistance, hitMask, QueryTriggerInteraction.Ignore))
+            {
+                Vector3Int placePos = AdjacentCellOnHitFace(hit);
+
+                BlockType selected = invenUI.GetInventorySlot();
+                if (inventory.Consume(selected, 1))
+                {
+                    FindAnyObjectByType<NoiseVoxelMap>().PlaceTile(placePos, selected);
                 }
             }
         }
