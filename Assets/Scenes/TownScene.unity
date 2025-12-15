@@ -2377,7 +2377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68d6c03210314ec45944a9a29d61d495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetSceneName: SammpleScene
+  targetSceneName: CaveScene
   targetSpawnId: FromCave
   interactKey: 101
 --- !u!1 &604595303
@@ -3230,89 +3230,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 846039602}
   m_CullTransparentMesh: 1
---- !u!1 &897532992
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 897532995}
-  - component: {fileID: 897532994}
-  - component: {fileID: 897532993}
-  m_Layer: 0
-  m_Name: GameObject (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &897532993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 897532992}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ae3f8642af23c045811a1e2cced9257, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gemInventoryPanel: {fileID: 0}
---- !u!114 &897532994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 897532992}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d31731801afd974c8534d23c4893bbe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Dirt: {fileID: 21300000, guid: 6e5bd358888fef641a85c32b472ea250, type: 3}
-  Grass: {fileID: 21300000, guid: d68d28cf5414aad4681d6fe6c831b5b6, type: 3}
-  Water: {fileID: 0}
-  GoldOre: {fileID: 21300000, guid: f9ed9c81a170a8a46b59cbfb68422d39, type: 3}
-  GoldIngot: {fileID: 21300000, guid: 10722139f2a71934a9d6c14329c74a66, type: 3}
-  SilverOre: {fileID: 21300000, guid: 5250b78754897234f9db95c9c5d652c8, type: 3}
-  SilverIgot: {fileID: 21300000, guid: f4cd8fa631be6aa439dcc9dab475b4e9, type: 3}
-  GoldRing: {fileID: 21300000, guid: a834ca65a4d439945a4d4a3c6bb8b98e, type: 3}
-  GoldNecklace: {fileID: 21300000, guid: 8679e78d0a8a25d40bc4a0f5640415db, type: 3}
-  SilverRing: {fileID: 21300000, guid: dfafb3df6e3264c4b8334ffe903e84a5, type: 3}
-  SilverNecklace: {fileID: 21300000, guid: 028b1a130ded85540abb65e42c6ec55a, type: 3}
-  DiamondOre: {fileID: 21300000, guid: f4f92627ce690ee45814f159ee8f0b99, type: 3}
-  DiamondGem: {fileID: 21300000, guid: 0481c4b856e1ec349a6e6230d688b91e, type: 3}
-  Slot:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  SlotItem: {fileID: 6562612206321399148, guid: 6afd9478686fece488613853b3072485, type: 3}
-  selectedIndex: -1
---- !u!4 &897532995
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 897532992}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 960, y: 540, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &937719284
 GameObject:
   m_ObjectHideFlags: 0
@@ -6829,7 +6746,6 @@ SceneRoots:
   - {fileID: 1595020341}
   - {fileID: 1117871044}
   - {fileID: 390321052}
-  - {fileID: 897532995}
   - {fileID: 2095038257}
   - {fileID: 1502674119}
   - {fileID: 579504720}

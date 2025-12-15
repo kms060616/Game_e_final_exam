@@ -185,8 +185,22 @@ public class InventoryUI : MonoBehaviour
 
     void OnEnable()
     {
-        var inv = FindObjectOfType<Inventory>();
-        if (inv != null)
-            UpdateInventory(inv);
+        if (Slot == null || Slot.Count == 0)
+        {
+            Debug.LogWarning("[InventoryUI] Slot 리스트가 비어있어서 UpdateInventory를 건너뜀");
+            return;
+        }
+
+        for (int i = 0; i < Slot.Count; i++)
+        {
+            if (Slot[i] == null)
+            {
+                Debug.LogWarning($"[InventoryUI] Slot[{i}]가 비어있어서 UpdateInventory를 건너뜀");
+                return;
+            }
+        }
+
+        var inv = FindObjectOfType<Inventory>(true);
+        if (inv != null) UpdateInventory(inv);
     }
 }
