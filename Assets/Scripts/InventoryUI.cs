@@ -133,6 +133,9 @@ public class InventoryUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.anyKeyDown)
+            Debug.Log($"[InvUI] keyDown, SlotCount={Slot.Count}, itemsUI={items.Count}");
+
         for (int i = 0; i < Mathf.Min(9, Slot.Count); i++)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1 + i))
@@ -185,22 +188,10 @@ public class InventoryUI : MonoBehaviour
 
     void OnEnable()
     {
-        if (Slot == null || Slot.Count == 0)
-        {
-            Debug.LogWarning("[InventoryUI] Slot 리스트가 비어있어서 UpdateInventory를 건너뜀");
-            return;
-        }
+        var player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null) return;
 
-        for (int i = 0; i < Slot.Count; i++)
-        {
-            if (Slot[i] == null)
-            {
-                Debug.LogWarning($"[InventoryUI] Slot[{i}]가 비어있어서 UpdateInventory를 건너뜀");
-                return;
-            }
-        }
-
-        var inv = FindObjectOfType<Inventory>(true);
+        var inv = player.GetComponent<Inventory>();
         if (inv != null) UpdateInventory(inv);
     }
 }

@@ -18,9 +18,13 @@ public class PlayerHarvester : MonoBehaviour
 
     private void Awake()
     {
+        
+
+        inventory = GetComponent<Inventory>();   //같은 플레이어 오브젝트에 붙은 Inventory만 사용
+        invenUI = FindObjectOfType<InventoryUI>(true);
+        Debug.Log($"[Harvester] invenUI={(invenUI ? invenUI.gameObject.name : "NULL")}");
         _cam = Camera.main;
-        if (inventory == null) inventory = gameObject.AddComponent<Inventory>();
-        invenUI = FindAnyObjectByType<InventoryUI>();
+        
 
     }
     // Start is called before the first frame update
@@ -74,6 +78,7 @@ public class PlayerHarvester : MonoBehaviour
         else
         {
             if (hasPreview) seletedBlock.transform.localScale = Vector3.zero;
+            Debug.Log("레이캐스트가 아무것도 못 맞췄어요!");
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -84,9 +89,19 @@ public class PlayerHarvester : MonoBehaviour
                 Vector3Int placePos = AdjacentCellOnHitFace(hit);
 
                 BlockType selected = invenUI.GetInventorySlot();
+
+                Debug.Log($"[Place] selected={selected} have={inventory.GetCount(selected)} invObj={inventory.gameObject.name}");
+
                 if (inventory.Consume(selected, 1))
                 {
-                    FindAnyObjectByType<NoiseVoxelMap>().PlaceTile(placePos, selected);
+                    Debug.Log("[Place] consume OK");
+                    var map = FindAnyObjectByType<NoiseVoxelMap>();
+                    Debug.Log($"[Place] map={(map ? map.name : "NULL")} pos={placePos}");
+                    if (map != null) map.PlaceTile(placePos, selected);
+                }
+                else
+                {
+                    Debug.Log("[Place] consume FAIL");
                 }
             }
         }
