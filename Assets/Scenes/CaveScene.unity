@@ -6714,6 +6714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae3f8642af23c045811a1e2cced9257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gemPanel: {fileID: 241631816}
 --- !u!1 &1524698006
 GameObject:
   m_ObjectHideFlags: 0

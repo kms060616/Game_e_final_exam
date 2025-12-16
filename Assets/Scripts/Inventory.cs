@@ -10,6 +10,7 @@ public class Inventory : MonoBehaviour
 
 
 
+
     public void Add(BlockType type, int count = 1)
     {
         if (!items.ContainsKey(type)) items[type] = 0;
@@ -51,7 +52,8 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         
-        gemUI = FindObjectOfType<GemInventoryUI>();
+        //gemUI = FindObjectOfType<GemInventoryUI>();
+        gemUI = FindObjectOfType<GemInventoryUI>(true);
 
         invenUI = FindObjectOfType<InventoryUI>(true);
 
