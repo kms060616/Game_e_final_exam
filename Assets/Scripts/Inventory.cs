@@ -60,6 +60,8 @@ public class Inventory : MonoBehaviour
 
         if (invenUI != null) invenUI.UpdateInventory(this);
 
+        Debug.Log("[Inventory] Start complete");
+
 
     }
 
