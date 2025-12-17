@@ -14,16 +14,17 @@ public class OrderNPC : MonoBehaviour
 
     void Start()
     {
-        playerInventory = FindObjectOfType<Inventory>();
-        orderPanel.SetActive(false);
+        var player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null) playerInventory = player.GetComponent<Inventory>();
 
+        orderPanel.SetActive(false);
         actionButton.onClick.AddListener(OnActionButton);
     }
 
     void Update()
     {
         // 간단한 예시: 플레이어가 가까이 있고 E 누르면 오픈
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             TogglePanel();
         }
@@ -46,22 +47,20 @@ public class OrderNPC : MonoBehaviour
 
         if (!gm.HasActiveOrder)
         {
-            // 아직 의뢰 없음 → 새 의뢰 제안
             orderText.text = "새 의뢰를 받겠습니까?\n예) 골드 반지 x1 제작";
             buttonText.text = "의뢰 받기";
+            actionButton.interactable = true;   //  항상 가능
         }
         else
         {
-            // 의뢰 진행 중 → 완료 가능한지 체크
             var o = gm.currentOrder;
             string itemName = GetOrderName(o.type);
 
             orderText.text = $"현재 의뢰: {itemName} x{o.count}\n보상: {o.reward} G";
 
-            if (CanCompleteOrder(o))
-                buttonText.text = "의뢰 완료";
-            else
-                buttonText.text = "아직 미완료";
+            bool can = CanCompleteOrder(o);
+            buttonText.text = can ? "의뢰 완료" : "아직 미완료";
+            actionButton.interactable = can;    // 완료 가능할 때만 클릭 가능
         }
     }
 
@@ -128,7 +127,7 @@ public class OrderNPC : MonoBehaviour
         playerInventory.Consume(required, order.count);
 
         // 돈 지급
-        GameManager.Instance.money += order.reward;
+        GameManager.Instance.AddMoney(order.reward);
 
         Debug.Log($"[Order] 의뢰 완료! +{order.reward} G (총 {GameManager.Instance.money})");
     }

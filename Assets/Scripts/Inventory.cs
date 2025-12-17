@@ -58,6 +58,10 @@ public class Inventory : MonoBehaviour
         invenUI = FindObjectOfType<InventoryUI>(true);
 
         Add(BlockType.Dirt, 10);
+        Add(BlockType.GoldIngot, 10);
+        Add(BlockType.SilverIngot, 10);
+        Add(BlockType.SilverOre, 10);
+        Add(BlockType.GoldOre, 10);
         Add(BlockType.Grass, 10);
 
         if (invenUI != null) invenUI.UpdateInventory(this);
